@@ -1,8 +1,8 @@
 // Bismillahir Rahmanir Rahim
      
      
-// link    : https://codeforces.com/contest/451/problem/B
-// status  : wa ac
+// link    : https://codeforces.com/contest/1401/problem/C
+// status  : 
      
      
 #pragma GCC optimize("O1,O2,O3")
@@ -58,65 +58,49 @@ ll testcase = 1;
 void AmiEktaGadha(ll test)
 {   
     ll n; cin >> n;
-    vector<ll> v, vs;
+    vector<ll> v(n), v1(n);
+    ll mn = M;
+    bool alreadysorted = true;
+    cin >> v[0];
+    v1[0] = v[0];
+
+    forsn(i,1,n) 
+    {
+        cin >> v[i]; v1[i]=v[i];
+        if(v[i] < v[i-1]) alreadysorted = false;
+        mn = min(mn,v[i]);
+    }
+    if(alreadysorted)
+    {
+        cout << "YES\n";
+        return;
+    }
+    sort(all(v1));
+
+    //dbg(mn);
     forn(i,n)
-    {
-        ll x; cin >> x; v.push_back(x); vs.push_back(x);
-    }
-
-    sort(all(vs));
-    bool sorted = true;ll start = -1, end = -1;
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i])
+    {   
+        //dbg(v[i]); dbg(v1[i]);
+        if(v1[i] != v[i])
         {
-                start = i;
-                sorted = false;
-                break;
-        }
-    //dbg(start); dbg(end);
-    }  
-    //dbg(start); dbg(end);
-    if(start != -1) rforn(i,n-1)
-    {
-        if(v[i] != vs[i]) 
-        {
-            end = i;
-            break;
-        }
-    }
-
-
-    if(sorted)
-    {
-        
-    cout << "yes\n" << start+2 << " " << end+2 << nl; return;
-    }
-
-    reverse(v.begin()+start,v.begin()+end+1);
-    //forn(i,end-start) swap(v[start+i],v[end-i]);
-    /*forn(i,n)
-    {
-        dbg(v[i]); dbg(vs[i]);
-    }
-    */
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i]) 
-        {
-            cout << "no" << nl;
-            return;
+            if(v[i]%mn != 0) 
+            {
+                cout << "NO\n"; return;
+            }
         }
     }
-    cout << "yes\n" << start+1 << " " << end+1 << nl; return;
+
+    cout << "YES\n";
+    return;
+
+
+
 }   
     
 int main()
 {   
     fastio;
-    //cin >> testcase;
+    cin >> testcase;
     
     ll test;
     for(test = 1; test <= testcase; test++)

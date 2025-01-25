@@ -1,8 +1,8 @@
 // Bismillahir Rahmanir Rahim
      
      
-// link    : https://codeforces.com/contest/451/problem/B
-// status  : wa ac
+// link    : https://codeforces.com/contest/545/problem/D
+// status  : AC
      
      
 #pragma GCC optimize("O1,O2,O3")
@@ -57,60 +57,23 @@ ll testcase = 1;
 
 void AmiEktaGadha(ll test)
 {   
-    ll n; cin >> n;
-    vector<ll> v, vs;
-    forn(i,n)
-    {
-        ll x; cin >> x; v.push_back(x); vs.push_back(x);
-    }
+    ll n; cin >> n; 
+    
+    vector<ll> v(n); 
+    forn(i,n) cin >> v[i]; 
+    sort(v.begin(),v.begin()+n);
 
-    sort(all(vs));
-    bool sorted = true;ll start = -1, end = -1;
+    ll ans = 0, w8 = 0;
     forn(i,n)
     {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i])
+        if(w8<=v[i])
         {
-                start = i;
-                sorted = false;
-                break;
-        }
-    //dbg(start); dbg(end);
-    }  
-    //dbg(start); dbg(end);
-    if(start != -1) rforn(i,n-1)
-    {
-        if(v[i] != vs[i]) 
-        {
-            end = i;
-            break;
+            ans++; w8+=v[i];
         }
     }
 
-
-    if(sorted)
-    {
-        
-    cout << "yes\n" << start+2 << " " << end+2 << nl; return;
-    }
-
-    reverse(v.begin()+start,v.begin()+end+1);
-    //forn(i,end-start) swap(v[start+i],v[end-i]);
-    /*forn(i,n)
-    {
-        dbg(v[i]); dbg(vs[i]);
-    }
-    */
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i]) 
-        {
-            cout << "no" << nl;
-            return;
-        }
-    }
-    cout << "yes\n" << start+1 << " " << end+1 << nl; return;
+    cout << ans << nl;
+    return;
 }   
     
 int main()
@@ -174,19 +137,3 @@ This isn't a joke. Do it if you get stuck. It's shit practice in my opinion, but
 
 
 
-    
-//OJ debugging 
-    
-/*  
-#ifndef ONLINE_JUDGE
-#define dbg(x) cerr << #x << " " << x << endl
-#else
-#define dbg(x)
-#endif
-*/  
-//goes into main()
-/*
-#ifndef ONLINE_JUDGE
-freopen("Error.txt", "w", stderr);
-#endif
-*/

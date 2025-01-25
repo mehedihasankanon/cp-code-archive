@@ -1,9 +1,7 @@
 // Bismillahir Rahmanir Rahim
      
-     
-// link    : https://codeforces.com/contest/451/problem/B
-// status  : wa ac
-     
+// link    : 
+// status  : 
      
 #pragma GCC optimize("O1,O2,O3")
 #pragma GCC optimize("Ofast,unroll-loops")
@@ -15,33 +13,25 @@ using namespace std;
     
 typedef long long               ll;
 typedef long double             ld;
-typedef pair<int,int>           p32;
-typedef pair<ll,ll>             p64;
+typedef pair<int,int>           pii;
+typedef pair<ll,ll>             pll;
 typedef pair<double,double>     pdd;
-typedef vector<ll>              v64;
-typedef vector<int>             v32;
-
-typedef vector<vector<int> >    vv32;
-typedef vector<vector<ll> >     vv64;
-typedef vector<vector<p64> >    vvp64;
-typedef vector<p64>             vp64;
-typedef vector<p32>             vp32;
+typedef vector<ll>              vll;
+typedef vector<int>             vint;
     
 ll M = 1000000007;
 ll MOD = 998244353;
 ld eps = 1e-12;
     
-#define dbg(x)                  cout << #x << " " << x << endl
+#define dbg(x)                  cout << #x << " " << x << "n"
 #define nl                      "\n"
 #define fastio                  ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr)
 #define INF                     2e18
-#define forn(i,e)               for(ll i = 0; i < e; i++)
-#define forsn(i,s,e)            for(ll i = s; i < e; i++)
-#define rforn(i,s)              for(ll i = s; i >= 0; i--)
-#define rforsn(i,s,e)           for(ll i = s; i >= e; i--)
+#define forn(i,s,e)             for(ll i = s; i < e; i++)
+#define forsn(i,s,e,d)          for(ll i = s; i < e; i+=d)
+#define rforn(i,s,e)            for(ll i = s; i >= e; i--)
+#define rforsn(i,s,e,d)         for(ll i = s; i >= e; i-=d)
 
-#define sf2(x,y)                cin >> x >> y
-#define sf3(x,y,z)              cin >> x >> y >> z
 #define pnl                     cout << nl
 #define eb                      emplace_back
 #define mp                      make_pair
@@ -58,65 +48,26 @@ ll testcase = 1;
 void AmiEktaGadha(ll test)
 {   
     ll n; cin >> n;
-    vector<ll> v, vs;
-    forn(i,n)
+    if(n < 4)
     {
-        ll x; cin >> x; v.push_back(x); vs.push_back(x);
+    cout << "-1" << nl;
+    return;
     }
-
-    sort(all(vs));
-    bool sorted = true;ll start = -1, end = -1;
-    forn(i,n)
+    else
     {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i])
+        if((n%4==1 and n/4 < 2) or (n%4==3 and n/4 < 3)) cout << -1 << nl;
+        else 
         {
-                start = i;
-                sorted = false;
-                break;
-        }
-    //dbg(start); dbg(end);
-    }  
-    //dbg(start); dbg(end);
-    if(start != -1) rforn(i,n-1)
-    {
-        if(v[i] != vs[i]) 
-        {
-            end = i;
-            break;
+            cout << n/4 - (n%4)%2 << nl;
+            return; 
         }
     }
-
-
-    if(sorted)
-    {
-        
-    cout << "yes\n" << start+2 << " " << end+2 << nl; return;
-    }
-
-    reverse(v.begin()+start,v.begin()+end+1);
-    //forn(i,end-start) swap(v[start+i],v[end-i]);
-    /*forn(i,n)
-    {
-        dbg(v[i]); dbg(vs[i]);
-    }
-    */
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i]) 
-        {
-            cout << "no" << nl;
-            return;
-        }
-    }
-    cout << "yes\n" << start+1 << " " << end+1 << nl; return;
 }   
     
 int main()
 {   
     fastio;
-    //cin >> testcase;
+    cin >> testcase;
     
     ll test;
     for(test = 1; test <= testcase; test++)

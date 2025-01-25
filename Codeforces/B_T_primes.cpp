@@ -1,8 +1,8 @@
 // Bismillahir Rahmanir Rahim
      
      
-// link    : https://codeforces.com/contest/451/problem/B
-// status  : wa ac
+// link    : https://codeforces.com/contest/230/problem/B
+// status  : 3 wa, ac
      
      
 #pragma GCC optimize("O1,O2,O3")
@@ -54,69 +54,49 @@ ld eps = 1e-12;
 ll testcase = 1;
 
 
+const long long Pmax = 1000000; bool prime[Pmax+10]; vector<long long> primes; 
+
+void sieve (void)
+{
+    for(long long i = 2; i <= Pmax; i++) prime[i] = true; 
+    
+    prime[1] = false;
+    for(long long i = 2; i <= Pmax; i += 1)
+    {
+        if(prime[i]) 
+        {
+            for(long long j = i*i; j <= Pmax; j += i)
+            {
+                prime[j] = false;
+            }
+            primes.push_back(i);
+        }
+    }
+
+}
+
+
 
 void AmiEktaGadha(ll test)
 {   
     ll n; cin >> n;
-    vector<ll> v, vs;
     forn(i,n)
     {
-        ll x; cin >> x; v.push_back(x); vs.push_back(x);
+        ll x; cin >> x;
+        ll s = (ll)sqrt(x);
+        //dbg(s);
+        //cout << boolalpha << prime[5] << nl;
+        if(s*s==x and x > 1 and prime[s]==true) cout << "YES\n";
+        else cout << "NO\n";
     }
-
-    sort(all(vs));
-    bool sorted = true;ll start = -1, end = -1;
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i])
-        {
-                start = i;
-                sorted = false;
-                break;
-        }
-    //dbg(start); dbg(end);
-    }  
-    //dbg(start); dbg(end);
-    if(start != -1) rforn(i,n-1)
-    {
-        if(v[i] != vs[i]) 
-        {
-            end = i;
-            break;
-        }
-    }
-
-
-    if(sorted)
-    {
-        
-    cout << "yes\n" << start+2 << " " << end+2 << nl; return;
-    }
-
-    reverse(v.begin()+start,v.begin()+end+1);
-    //forn(i,end-start) swap(v[start+i],v[end-i]);
-    /*forn(i,n)
-    {
-        dbg(v[i]); dbg(vs[i]);
-    }
-    */
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i]) 
-        {
-            cout << "no" << nl;
-            return;
-        }
-    }
-    cout << "yes\n" << start+1 << " " << end+1 << nl; return;
+    return;
 }   
     
 int main()
 {   
     fastio;
     //cin >> testcase;
+    sieve();
     
     ll test;
     for(test = 1; test <= testcase; test++)

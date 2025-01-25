@@ -1,8 +1,9 @@
 // Bismillahir Rahmanir Rahim
      
      
-// link    : https://codeforces.com/contest/451/problem/B
+// link    : https://codeforces.com/contest/1335/problem/D
 // status  : wa ac
+// 9 %9 = 0 :)))))
      
      
 #pragma GCC optimize("O1,O2,O3")
@@ -53,70 +54,36 @@ ld eps = 1e-12;
 
 ll testcase = 1;
 
-
+char op(char ch)
+{
+    int n = ch - '0'; n++; 
+    if(n == 10) n = 1; 
+    return n + '0'; 
+}
 
 void AmiEktaGadha(ll test)
 {   
-    ll n; cin >> n;
-    vector<ll> v, vs;
-    forn(i,n)
-    {
-        ll x; cin >> x; v.push_back(x); vs.push_back(x);
-    }
+    vector<string> v(9);
+    forn(i,9) cin >> v[i];
 
-    sort(all(vs));
-    bool sorted = true;ll start = -1, end = -1;
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i])
-        {
-                start = i;
-                sorted = false;
-                break;
-        }
-    //dbg(start); dbg(end);
-    }  
-    //dbg(start); dbg(end);
-    if(start != -1) rforn(i,n-1)
-    {
-        if(v[i] != vs[i]) 
-        {
-            end = i;
-            break;
-        }
-    }
+    v[0][0] = op(v[0][0]);
+    v[3][1] = op(v[3][1]);
+    v[6][2] = op(v[6][2]);
+    v[1][4] = op(v[1][4]);
+    v[4][5] = op(v[4][5]);
+    v[7][3] = op(v[7][3]);
+    v[2][8] = op(v[2][8]);
+    v[5][6] = op(v[5][6]);
+    v[8][7] = op(v[8][7]);
 
-
-    if(sorted)
-    {
-        
-    cout << "yes\n" << start+2 << " " << end+2 << nl; return;
-    }
-
-    reverse(v.begin()+start,v.begin()+end+1);
-    //forn(i,end-start) swap(v[start+i],v[end-i]);
-    /*forn(i,n)
-    {
-        dbg(v[i]); dbg(vs[i]);
-    }
-    */
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i]) 
-        {
-            cout << "no" << nl;
-            return;
-        }
-    }
-    cout << "yes\n" << start+1 << " " << end+1 << nl; return;
+    forn(i,9) cout << v[i] << nl;
+    return;
 }   
     
 int main()
 {   
     fastio;
-    //cin >> testcase;
+    cin >> testcase;
     
     ll test;
     for(test = 1; test <= testcase; test++)
@@ -189,4 +156,16 @@ This isn't a joke. Do it if you get stuck. It's shit practice in my opinion, but
 #ifndef ONLINE_JUDGE
 freopen("Error.txt", "w", stderr);
 #endif
+
+
+
+254873296
+386512714
+729641836
+873725149
+975315628
+412968457
+632457982
+598336471
+247189573
 */

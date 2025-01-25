@@ -1,8 +1,8 @@
 // Bismillahir Rahmanir Rahim
      
      
-// link    : https://codeforces.com/contest/451/problem/B
-// status  : wa ac
+// link    : https://codeforces.com/contest/413/problem/B
+// status  : tle, expected
      
      
 #pragma GCC optimize("O1,O2,O3")
@@ -57,60 +57,30 @@ ll testcase = 1;
 
 void AmiEktaGadha(ll test)
 {   
-    ll n; cin >> n;
-    vector<ll> v, vs;
+    ll n,m,k; cin >> n >> m >>k;
+    // store in which chat which employee is
+    vector<vector<int>> emp(m);
     forn(i,n)
     {
-        ll x; cin >> x; v.push_back(x); vs.push_back(x);
-    }
-
-    sort(all(vs));
-    bool sorted = true;ll start = -1, end = -1;
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i])
+        forn(j,m)
         {
-                start = i;
-                sorted = false;
-                break;
-        }
-    //dbg(start); dbg(end);
-    }  
-    //dbg(start); dbg(end);
-    if(start != -1) rforn(i,n-1)
-    {
-        if(v[i] != vs[i]) 
-        {
-            end = i;
-            break;
+            ll x; cin >> x;
+            if(x) emp[j].push_back(i+1);
         }
     }
+    vector<ll> ntf(n+1);
 
-
-    if(sorted)
+    forn(i,k)
     {
-        
-    cout << "yes\n" << start+2 << " " << end+2 << nl; return;
-    }
-
-    reverse(v.begin()+start,v.begin()+end+1);
-    //forn(i,end-start) swap(v[start+i],v[end-i]);
-    /*forn(i,n)
-    {
-        dbg(v[i]); dbg(vs[i]);
-    }
-    */
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i]) 
+        ll x, y; cin >> x >> y;
+        for(auto e : emp[y-1])
         {
-            cout << "no" << nl;
-            return;
-        }
+            if(e!=x) ntf[e]++;
+        } 
     }
-    cout << "yes\n" << start+1 << " " << end+1 << nl; return;
+
+    forsn(i,1,n+1) cout << ntf[i] << " ";
+    pnl; return;
 }   
     
 int main()

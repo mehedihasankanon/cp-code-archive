@@ -1,8 +1,8 @@
 // Bismillahir Rahmanir Rahim
      
      
-// link    : https://codeforces.com/contest/451/problem/B
-// status  : wa ac
+// link    : 
+// status  : 
      
      
 #pragma GCC optimize("O1,O2,O3")
@@ -57,60 +57,78 @@ ll testcase = 1;
 
 void AmiEktaGadha(ll test)
 {   
-    ll n; cin >> n;
-    vector<ll> v, vs;
+    /*ll n; cin >> n;
+    vector<bool> left(1005,0),right(1005,0);
+    unordered_set<ll> bottles;
+
     forn(i,n)
     {
-        ll x; cin >> x; v.push_back(x); vs.push_back(x);
+        ll l,r;
+        cin >> l >> r;
+        left[l] = 1; right[r]=1; bottles.insert(l); bottles.insert(r);
     }
+    ll opened = 0;
 
-    sort(all(vs));
-    bool sorted = true;ll start = -1, end = -1;
+    for(auto b : bottles)
+    {
+        if(left[b] and right[b]) opened++;
+    }
+    cout << n - opened << nl;*/
+
+    /*ll n; cin >> n;
+    vp64 v;
     forn(i,n)
     {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i])
-        {
-                start = i;
-                sorted = false;
-                break;
-        }
-    //dbg(start); dbg(end);
-    }  
-    //dbg(start); dbg(end);
-    if(start != -1) rforn(i,n-1)
-    {
-        if(v[i] != vs[i]) 
-        {
-            end = i;
-            break;
-        }
+        ll a,b; cin >> a >> b;
+        v.push_back({a,b});
+        //dbg(a); dbg(b);
     }
+    vector<bool> op(1010,false);
 
-
-    if(sorted)
+    for(auto [p,q] : v)
     {
+        if(op[p]) op[q] = true;
         
-    cout << "yes\n" << start+2 << " " << end+2 << nl; return;
-    }
-
-    reverse(v.begin()+start,v.begin()+end+1);
-    //forn(i,end-start) swap(v[start+i],v[end-i]);
-    /*forn(i,n)
-    {
-        dbg(v[i]); dbg(vs[i]);
-    }
-    */
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i]) 
+        else
         {
-            cout << "no" << nl;
-            return;
+            for(auto [a,b]:v)
+            {
+                if(a != p and q != b)
+                {
+                    //dbg(q); dbg(a);
+                    if(q == a) op[q] = true;
+                }
+            }
         }
     }
-    cout << "yes\n" << start+1 << " " << end+1 << nl; return;
+    ll ans=0;
+    forsn(i,1,n+1)
+    {
+        if(op[i]) ans++;
+    }
+    cout << n-ans << nl;
+    return;*/
+
+    ll n; cin >> n;
+    vector<bool> op(1010,false);
+    forn(i,n)
+    {
+        ll a, b; cin >> a >> b;
+        if(a != b)
+        {
+            op[b] = true;
+        }
+    }
+
+    ll ans = 0;
+    forsn(i,1,n+1)
+    {
+        dbg(i);
+        cout << boolalpha << op[i] << nl;
+        if(op[i]) ans++;
+    }
+    cout << n-ans << nl;
+    return; 
 }   
     
 int main()

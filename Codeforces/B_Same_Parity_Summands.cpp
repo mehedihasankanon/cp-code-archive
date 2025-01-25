@@ -1,8 +1,8 @@
 // Bismillahir Rahmanir Rahim
      
      
-// link    : https://codeforces.com/contest/451/problem/B
-// status  : wa ac
+// link    : https://codeforces.com/problemset/problem/1352/B
+// status  : wa*4 ac ***testcase check kori nai aaaaaaaaaaaaaaa***
      
      
 #pragma GCC optimize("O1,O2,O3")
@@ -57,66 +57,68 @@ ll testcase = 1;
 
 void AmiEktaGadha(ll test)
 {   
-    ll n; cin >> n;
-    vector<ll> v, vs;
-    forn(i,n)
+    ll n, k;
+    cin >> n >> k;
+    if(n < k)
     {
-        ll x; cin >> x; v.push_back(x); vs.push_back(x);
+        cout << "NO\n"; return;
     }
-
-    sort(all(vs));
-    bool sorted = true;ll start = -1, end = -1;
-    forn(i,n)
+    else if(n==k)
     {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i])
+            cout << "YES" << nl;
+            forn(i,n) cout << "1 ";
+            pnl; return;
+    }
+    if(n%2)
+    {
+        if(k%2)
         {
-                start = i;
-                sorted = false;
-                break;
+            cout << "YES" << nl;
+            forn(i,k-1) cout << "1 ";
+            cout << n - (k-1);
+            pnl;
+            return;
         }
-    //dbg(start); dbg(end);
-    }  
-    //dbg(start); dbg(end);
-    if(start != -1) rforn(i,n-1)
-    {
-        if(v[i] != vs[i]) 
+        else
         {
-            end = i;
-            break;
-        }
-    }
-
-
-    if(sorted)
-    {
-        
-    cout << "yes\n" << start+2 << " " << end+2 << nl; return;
-    }
-
-    reverse(v.begin()+start,v.begin()+end+1);
-    //forn(i,end-start) swap(v[start+i],v[end-i]);
-    /*forn(i,n)
-    {
-        dbg(v[i]); dbg(vs[i]);
-    }
-    */
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i]) 
-        {
-            cout << "no" << nl;
+            cout << "NO" << nl;
             return;
         }
     }
-    cout << "yes\n" << start+1 << " " << end+1 << nl; return;
+    else
+    {
+            if(n > 2*k-2)
+            {
+                cout << "YES" << nl;
+                forn(i,k-1) cout << "2 ";
+                cout << n - 2*(k-1) << nl;
+                return;
+            }          
+            else
+            {
+                if((n-k+1)%2)
+                {
+                    cout << "YES" << nl;
+                    forn(i,k-1)
+                    {
+                        cout << "1 ";
+                    }
+                    cout << n - k + 1 << nl;
+                    return;
+                }
+                else 
+                {
+                    cout << "NO" << nl;
+                    return;
+                }
+            }  
+    }
 }   
     
 int main()
 {   
     fastio;
-    //cin >> testcase;
+    cin >> testcase;
     
     ll test;
     for(test = 1; test <= testcase; test++)

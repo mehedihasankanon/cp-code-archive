@@ -1,8 +1,12 @@
 // Bismillahir Rahmanir Rahim
      
      
-// link    : https://codeforces.com/contest/451/problem/B
+// link    : https://codeforces.com/contest/146/problem/B
 // status  : wa ac
+/*
+---------- ans > a -------------
+******NEED TO READ CAREFULLY :)******
+*/
      
      
 #pragma GCC optimize("O1,O2,O3")
@@ -54,63 +58,93 @@ ld eps = 1e-12;
 ll testcase = 1;
 
 
+string mask(ll a)
+{
+    string out;
+    while(a > 0)
+    {
+        if(a%10==7 or a%10==4) out.push_back(a%10+'0');
+        a/=10;
+    }
+    reverse(out.begin(),out.end());
+    return out;
+}
+
 
 void AmiEktaGadha(ll test)
 {   
-    ll n; cin >> n;
-    vector<ll> v, vs;
-    forn(i,n)
+    /*string a, b; cin >> a >> b;
+    if(a.size() > b.size())
     {
-        ll x; cin >> x; v.push_back(x); vs.push_back(x);
-    }
-
-    sort(all(vs));
-    bool sorted = true;ll start = -1, end = -1;
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i])
+        ll e = a.size()-1;
+        while(!b.empty() or e >= 0)
         {
-                start = i;
-                sorted = false;
-                break;
+            if(b.back() >= a[e]) 
+            {
+                a[e] = b.back();
+                b.pop_back();
+            } 
+            else
+            {
+                if(e > 0)
+                {
+                    a[e] = b.back();
+                    b.pop_back();
+                    a[e-1]++;
+                }
+            }
+            e--;
         }
-    //dbg(start); dbg(end);
-    }  
-    //dbg(start); dbg(end);
-    if(start != -1) rforn(i,n-1)
-    {
-        if(v[i] != vs[i]) 
+        if(e == 0)
         {
-            end = i;
-            break;
+            if(!b.empty())
+            {
+                cout << b << a << nl;
+                return;
+            }
         }
-    }
-
-
-    if(sorted)
-    {
         
-    cout << "yes\n" << start+2 << " " << end+2 << nl; return;
     }
-
-    reverse(v.begin()+start,v.begin()+end+1);
-    //forn(i,end-start) swap(v[start+i],v[end-i]);
-    /*forn(i,n)
+    else if(a.size() == b.size())
     {
-        dbg(v[i]); dbg(vs[i]);
-    }
-    */
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i]) 
+        ll e = a.size()-1;
+        while(!b.empty() or e >= 0)
         {
-            cout << "no" << nl;
-            return;
+            if(b.back() >= a[e]) 
+            {
+                a[e] = b.back();
+                b.pop_back();
+            } 
+            else
+            {
+                if(e > 0)
+                {
+                    a[e] = b.back();
+                    b.pop_back();
+                    a[e-1]++;
+                }
+            }
+            e--;
+        }
+        if(e == 0)
+        {
+            if(!b.empty())
+            {
+                cout << b << a << nl;
+                return;
+            }
         }
     }
-    cout << "yes\n" << start+1 << " " << end+1 << nl; return;
+    else 
+    {
+        cout << b << nl;
+        return;
+    }*/
+    ll a; string b; cin >> a >> b; //dbg(b);
+    a++;
+    while(mask(a) != b) {a++; /*dbg(a); dbg(mask(a));*/}
+    cout << a << nl;
+    return;
 }   
     
 int main()

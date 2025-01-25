@@ -1,8 +1,8 @@
 // Bismillahir Rahmanir Rahim
      
      
-// link    : https://codeforces.com/contest/451/problem/B
-// status  : wa ac
+// link    : https://codeforces.com/contest/1955/problem/C
+// status  : RE AC
      
      
 #pragma GCC optimize("O1,O2,O3")
@@ -57,66 +57,69 @@ ll testcase = 1;
 
 void AmiEktaGadha(ll test)
 {   
-    ll n; cin >> n;
-    vector<ll> v, vs;
-    forn(i,n)
-    {
-        ll x; cin >> x; v.push_back(x); vs.push_back(x);
-    }
+    ll n, k; cin >> n >> k;
+    ll left = k/2 + k%2, right = k/2;
 
-    sort(all(vs));
-    bool sorted = true;ll start = -1, end = -1;
-    forn(i,n)
+    vector<ll> v(n);
+    forn(i,n) cin >> v[i];
+
+    ll ans = 0, indleft = 0, indright = n-1;
+    // left
+    while(1)
     {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i])
+        //this line was giving RE
+        if(indleft>n-1) break;
+
+        if(left - v[indleft] == 0)
         {
-                start = i;
-                sorted = false;
-                break;
+            left -= v[indleft];
+            v[indleft] = 0;
+            ans++;
+            break;
         }
-    //dbg(start); dbg(end);
-    }  
-    //dbg(start); dbg(end);
-    if(start != -1) rforn(i,n-1)
-    {
-        if(v[i] != vs[i]) 
+        else if(left - v[indleft] > 0)
         {
-            end = i;
+            left -= v[indleft];
+            v[indleft] = 0;
+            ans++;
+            indleft++;
+        }
+        else
+        {
+            v[indleft] -= left;
             break;
         }
     }
-
-
-    if(sorted)
+    while(1)
     {
-        
-    cout << "yes\n" << start+2 << " " << end+2 << nl; return;
-    }
+        // this line was giving RE
+        if(indright<0) break;
 
-    reverse(v.begin()+start,v.begin()+end+1);
-    //forn(i,end-start) swap(v[start+i],v[end-i]);
-    /*forn(i,n)
-    {
-        dbg(v[i]); dbg(vs[i]);
-    }
-    */
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i]) 
+        if(right - v[indright] == 0)
         {
-            cout << "no" << nl;
-            return;
+            right -= v[indright];
+            ans++;
+            break;
+        }
+        else if(right - v[indright] > 0)
+        {
+            right -= v[indright];
+            ans++;
+            indright--;
+        }
+        else
+        {
+            break;
         }
     }
-    cout << "yes\n" << start+1 << " " << end+1 << nl; return;
+    cout << min(ans,n) << nl;
+    return;
 }   
     
 int main()
 {   
     fastio;
-    //cin >> testcase;
+    cin >> testcase;
     
     ll test;
     for(test = 1; test <= testcase; test++)

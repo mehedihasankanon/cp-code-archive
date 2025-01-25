@@ -1,8 +1,8 @@
 // Bismillahir Rahmanir Rahim
      
      
-// link    : https://codeforces.com/contest/451/problem/B
-// status  : wa ac
+// link    : https://codeforces.com/problemset/problem/1328/B
+// status  : ac
      
      
 #pragma GCC optimize("O1,O2,O3")
@@ -57,66 +57,33 @@ ll testcase = 1;
 
 void AmiEktaGadha(ll test)
 {   
-    ll n; cin >> n;
-    vector<ll> v, vs;
+    ll n, k; cin >> n >> k;
+
+    ll l = 0, r = n, mid;
+    while(r-l > 1)
+    {
+        mid = (l+r)/2;
+        if(mid*(mid+1)/2 < k) l = mid;
+        else r = mid;
+    }
+
+    ll t = l; //dbg(t); dbg((n-1)-t*(t+1)/2);
+    string s(n,'a');//dbg(s);
     forn(i,n)
     {
-        ll x; cin >> x; v.push_back(x); vs.push_back(x);
+        if(i == (n-1)-(t+1)) cout << 'b';
+        else if(i == ((n)-k+t*(t+1)/2)) cout << 'b';
+        else cout << 'a';
     }
+    pnl;
+    return;
 
-    sort(all(vs));
-    bool sorted = true;ll start = -1, end = -1;
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i])
-        {
-                start = i;
-                sorted = false;
-                break;
-        }
-    //dbg(start); dbg(end);
-    }  
-    //dbg(start); dbg(end);
-    if(start != -1) rforn(i,n-1)
-    {
-        if(v[i] != vs[i]) 
-        {
-            end = i;
-            break;
-        }
-    }
-
-
-    if(sorted)
-    {
-        
-    cout << "yes\n" << start+2 << " " << end+2 << nl; return;
-    }
-
-    reverse(v.begin()+start,v.begin()+end+1);
-    //forn(i,end-start) swap(v[start+i],v[end-i]);
-    /*forn(i,n)
-    {
-        dbg(v[i]); dbg(vs[i]);
-    }
-    */
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i]) 
-        {
-            cout << "no" << nl;
-            return;
-        }
-    }
-    cout << "yes\n" << start+1 << " " << end+1 << nl; return;
 }   
     
 int main()
 {   
     fastio;
-    //cin >> testcase;
+    cin >> testcase;
     
     ll test;
     for(test = 1; test <= testcase; test++)

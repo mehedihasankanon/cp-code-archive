@@ -1,8 +1,14 @@
+// Problem: A. A Prank
+// Contest: Codeforces - Codeforces Round 520 (Div. 2)
+// URL: https://codeforces.com/contest/1062/problem/A
+// Memory Limit: 256 MB
+// Time Limit: 1000 ms
+// 
+// Powered by CP Editor (https://cpeditor.org)
+
 // Bismillahir Rahmanir Rahim
      
-     
-// link    : https://codeforces.com/contest/451/problem/B
-// status  : wa ac
+// status  : ac
      
      
 #pragma GCC optimize("O1,O2,O3")
@@ -58,59 +64,57 @@ ll testcase = 1;
 void AmiEktaGadha(ll test)
 {   
     ll n; cin >> n;
-    vector<ll> v, vs;
-    forn(i,n)
+    bool cons = false;
+    vector<ll> v(n);
+    forn(i,n) cin >> v[i];
+    
+    ll st, en; vector<ll> ans; ans.push_back(0);
+    forsn(i,1,n)
     {
-        ll x; cin >> x; v.push_back(x); vs.push_back(x);
+		//dbg(v[i]);
+		if(v[i] == v[i-1]+1)
+		{
+			if(!cons) 
+			{
+				st = i-1;
+				cons = true;
+			}
+		}
+		else 
+		{
+			if(cons) 
+			{
+				en = i-1;
+				ans.push_back(en-st-1);
+				if(v[st]==1)
+				{
+					ans.back()++;
+				}
+				if(v[en] == 1000) ans.back()++;
+				cons = false;
+			}
+			
+		}
+		
+		if(i==n-1)
+		{
+			if(cons) 
+			{
+				en = i;
+				ans.push_back(en-st-1);
+				if(v[st]==1)
+				{
+					ans.back()++;
+				}
+				if(v[en] == 1000) ans.back()++;
+				cons = false;
+			}
+		}
+		//dbg(st); dbg(en);
     }
-
-    sort(all(vs));
-    bool sorted = true;ll start = -1, end = -1;
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i])
-        {
-                start = i;
-                sorted = false;
-                break;
-        }
-    //dbg(start); dbg(end);
-    }  
-    //dbg(start); dbg(end);
-    if(start != -1) rforn(i,n-1)
-    {
-        if(v[i] != vs[i]) 
-        {
-            end = i;
-            break;
-        }
-    }
-
-
-    if(sorted)
-    {
-        
-    cout << "yes\n" << start+2 << " " << end+2 << nl; return;
-    }
-
-    reverse(v.begin()+start,v.begin()+end+1);
-    //forn(i,end-start) swap(v[start+i],v[end-i]);
-    /*forn(i,n)
-    {
-        dbg(v[i]); dbg(vs[i]);
-    }
-    */
-    forn(i,n)
-    {
-        //dbg(v[i]); dbg(vs[i]);
-        if(v[i] != vs[i]) 
-        {
-            cout << "no" << nl;
-            return;
-        }
-    }
-    cout << "yes\n" << start+1 << " " << end+1 << nl; return;
+    
+    sort(all(ans));
+    cout << ans.back() << nl;
 }   
     
 int main()

@@ -1,5 +1,11 @@
-//Bismillahir Rahmanir Rahim
+// Bismillahir Rahmanir Rahim
      
+     
+// link    : https://codeforces.com/contest/102/problem/B
+// status  : 
+     
+     
+#pragma GCC optimize("O1,O2,O3")
 #pragma GCC optimize("Ofast,unroll-loops")
 //#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma,bmi,bmi2,lzcnt")
     
@@ -21,8 +27,9 @@ typedef vector<vector<p64> >    vvp64;
 typedef vector<p64>             vp64;
 typedef vector<p32>             vp32;
     
+ll M = 1000000007;
 ll MOD = 998244353;
-double eps = 1e-12;
+ld eps = 1e-12;
     
 #define dbg(x)                  cout << #x << " " << x << endl
 #define nl                      "\n"
@@ -44,61 +51,95 @@ double eps = 1e-12;
 #define all(x)                  (x).begin(), (x).end()
 #define sz(x)                   ((ll)(x).size())
 
-ll sum(ll a)
+ll testcase = 1;
+
+ll digits(ll n)
 {
-    ll sum = 0, d = 1;
-    forn(i,7)//max 6 digit number. safekeeping er jonno 7
+    ll out = 0;
+    while(n > 0)
     {
-        sum += (a/d)%10;
-        d *= 10;
+        out += n%10; n/=10;
     }
-    //dbg(sum);
-    return sum;
+    return out;
 }
 
-void solve()
+
+
+void AmiEktaGadha(ll test)
 {   
-    char n[100005];
-    fgets(n,100005,stdin);
-
-    ll s = 0, cnt = 1;
-
-    if(strlen(n) == 2)
+    string s; cin >> s;
+    ll sum = 0, ans = 1;
+    if(s.size()==1)
     {
-        cout << "0" << nl;
+        cout << 0 << nl;
         return;
     }
-    else
+    for (auto c: s)
     {
-        for(ll i = 0; (n[i] != '\n'); i++) 
-            s += n[i] - '0';
+        sum += c-'0';
     }
-    //dbg(s);
-
-    while(1)
+    while(sum >= 10)
     {
-        if(s < 10) 
-        {
-            cout << cnt << nl;
-            return;
-        }
-        else
-        {
-            s = sum(s);
-            cnt++;
-        }
+        sum = digits(sum);
+        ans++;
     }
-}
+    cout << ans << nl;
+    return;
+}   
     
 int main()
 {   
     fastio;
-    solve();
+    //cin >> testcase;
+    
+    ll test;
+    for(test = 1; test <= testcase; test++)
+    {
+        AmiEktaGadha(test);
+    }
     return 0;
-    
 }   
-   
+/*
+NEVER FORGET TO:
+    Look at the problem's constraints before coding.
+How to cheese CF:
+    Find a lower bound or upper bound for the problem. Have faith that it is the answer of the problem.
+    If it isn't the answer, have more faith or change to another bound god by looking for a better bound.
+ 
+    Trust guesses. Who has time to think? If people in div2 AC the problem it requires no proof since people don't prove things.
+ 
+    You must draw cases. Thinking gets you nowhere, so draw cases and reach illogical conclusions from them.
+    Sometimes drawing cases is bad because it takes too much time. Faster is to not think at all
+    and just code a bruteforce solution.
+    This is called "law of small numbers". If something works for small numbers, surely it works for big numbers.
+    https://en.wikipedia.org/wiki/Faulty_generalization#Hasty_generalization don't mind the "faulty" part of it,
+    in competitive programming mistakes are lightly punished
+    Don't think about them being right or not, cf is a battle of intuition only.
+ 
+    Be as stupid as possible in implementation. Trying to be smart is an easy way to get WA.
+ 
+    Think about 2x2 cases for matrix problems and hope that everything works for the general case.
+ 
+    Find a necessary condition and trust it to be sufficient. They're basically the same thing.
+ 
+    Heuristics might speed up your code. Forget about complexity, it's only about ACing and not proving that your solution is good.
+ 
+    For paths in a grid starting at (1, i) or something like that, assume that they never cross and do D&C
+ 
+    Consider doing problems in reverse order of queries/updates
+ 
+    For combinatorics problems, consider symmetry
+ 
+General strategy (MUST DO):
+    Try to solve the problem with more restricted constraints.
+ 
+About testing:
+    Test n=1, a[i]=1, a[i]=n, etc. Basically, test low values. No need to test if pretests are strong, but if you get WA it's good.
+ 
+This isn't a joke. Do it if you get stuck. It's shit practice in my opinion, but do it if you want AC.
+*/
     
+
 
 
 
