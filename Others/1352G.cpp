@@ -1,6 +1,6 @@
 // Bismillahir Rahmanir Rahim
      
-// link    : https://vjudge.net/problem/CSES-1633
+// link    : https://codeforces.com/contest/1352/problem/G
 // status  : AC
      
 #pragma GCC optimize("O1,O2,O3")
@@ -39,23 +39,27 @@ void Pre(void)
 void Solve(ll test)
 {
     ll n; cin >> n;
-    vector<ll> dp(n + 1, 0);
-    // dp[1] = 1;
-    forn(i,1,n+1)
+    if(n < 4)
     {
-        if(i <= 6) dp[i] = 1;
-        forn(j,1,7)
-        {
-            if(i - j < 0) break;
-            // dbg(dp[i - j]);
-            dp[i] += dp[i - j];
-            dp[i] %= M;
-        }
-        dp[i] %= M;
+        cout << -1 << NL;
+        return;
     }
-    // forn(i,0,n+1) cerr << dp[i] << NL;
-    cout << dp[n] << NL;
-    return;
+    if(n & 1)
+    {
+        for(ll i = 2; i < n - 3; i += 2) cout << i << " ";
+        cout << n - 1 << " " << n - 3 << " ";
+        for(ll i = n; i >= 1; i -= 2) cout << i << " ";
+        cout << NL;
+        return;
+    }
+    else
+    {
+        for(ll i = 1; i < n - 3; i += 2) cout << i << " ";
+        cout << n - 1 << " " << n - 3 << " ";
+        for(ll i = n; i >= 2; i -= 2) cout << i << " ";
+        cout << NL;
+        return;
+    }
 }   
     
 int main()
@@ -64,7 +68,7 @@ int main()
     cin.tie(nullptr); cout.tie(nullptr);
     Pre();
     
-    // cin >> testcase;
+    cin >> testcase;
     
     ll test;
     for(test = 1; test <= testcase; test++) {

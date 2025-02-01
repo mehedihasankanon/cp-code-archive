@@ -1,7 +1,7 @@
 // Bismillahir Rahmanir Rahim
      
-// link    : https://vjudge.net/problem/CSES-1633
-// status  : AC
+// link    : https://cses.fi/problemset/task/1635
+// status  : 
      
 #pragma GCC optimize("O1,O2,O3")
 #pragma GCC optimize("Ofast,unroll-loops")
@@ -38,24 +38,24 @@ void Pre(void)
     
 void Solve(ll test)
 {
-    ll n; cin >> n;
-    vector<ll> dp(n + 1, 0);
-    // dp[1] = 1;
-    forn(i,1,n+1)
+    ll n, x; cin >> n >> x;
+    vector<ll> v(n);
+    vector<ll> dp(x+1, 0);
+    dp[0] = 0;
+    forn(i,0,n) cin >> v[i],dp[v[i]]++;
+
+
+    forn(i,1,x+1)
     {
-        if(i <= 6) dp[i] = 1;
-        forn(j,1,7)
+        forn(j,0,n)
         {
-            if(i - j < 0) break;
-            // dbg(dp[i - j]);
-            dp[i] += dp[i - j];
+            if(v[j] > i) break;
+            dp[i] += dp[i - v[j]];
             dp[i] %= M;
         }
         dp[i] %= M;
     }
-    // forn(i,0,n+1) cerr << dp[i] << NL;
-    cout << dp[n] << NL;
-    return;
+    cout << dp[x] << NL;
 }   
     
 int main()

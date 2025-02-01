@@ -1,6 +1,6 @@
 // Bismillahir Rahmanir Rahim
      
-// link    : https://vjudge.net/problem/CSES-1633
+// link    : https://cses.fi/problemset/task/1638
 // status  : AC
      
 #pragma GCC optimize("O1,O2,O3")
@@ -39,23 +39,32 @@ void Pre(void)
 void Solve(ll test)
 {
     ll n; cin >> n;
-    vector<ll> dp(n + 1, 0);
-    // dp[1] = 1;
+    vector<string> grid(n);
+    forn(i,0,n) cin >> grid[i];
+
+    if(grid[0][0] == '*' || grid[n - 1][n - 1] == '*')
+    {
+        cout << 0 << NL;
+        return;
+    }
+
+    vector<vector<ll>> w(n+1, vector<ll>(n+1,0));
+    w[1][1] = 1;
     forn(i,1,n+1)
     {
-        if(i <= 6) dp[i] = 1;
-        forn(j,1,7)
+        forn(j,1,n+1)
         {
-            if(i - j < 0) break;
-            // dbg(dp[i - j]);
-            dp[i] += dp[i - j];
-            dp[i] %= M;
+            if(grid[i - 1][j - 1] == '*') continue;
+            w[i][j] += (w[i - 1][j] + w[i][j - 1])%M;
+            w[i][j] %= M; 
         }
-        dp[i] %= M;
     }
-    // forn(i,0,n+1) cerr << dp[i] << NL;
-    cout << dp[n] << NL;
+
+    cout << w[n][n] << NL;
     return;
+
+
+
 }   
     
 int main()

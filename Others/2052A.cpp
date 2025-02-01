@@ -1,7 +1,7 @@
 // Bismillahir Rahmanir Rahim
      
-// link    : https://vjudge.net/problem/CSES-1633
-// status  : AC
+// link    : https://codeforces.com/contest/2052/problem/A
+// status  : 
      
 #pragma GCC optimize("O1,O2,O3")
 #pragma GCC optimize("Ofast,unroll-loops")
@@ -34,28 +34,53 @@ void Pre(void)
     
     return;
 }   
+
+bool comp (pair<ll,ll> p1, pair<ll,ll> p2)
+{
+    if(p1.second < p2.second) return true;
+    else if(p1.second == p2.second && p1.first < p2.first) return true;
+    return false;
+}
     
     
 void Solve(ll test)
 {
-    ll n; cin >> n;
-    vector<ll> dp(n + 1, 0);
-    // dp[1] = 1;
-    forn(i,1,n+1)
-    {
-        if(i <= 6) dp[i] = 1;
-        forn(j,1,7)
-        {
-            if(i - j < 0) break;
-            // dbg(dp[i - j]);
-            dp[i] += dp[i - j];
-            dp[i] %= M;
-        }
-        dp[i] %= M;
-    }
-    // forn(i,0,n+1) cerr << dp[i] << NL;
-    cout << dp[n] << NL;
-    return;
+    // ll n; cin >> n;
+    // // if(n == 1)
+    // // {
+    // //     cout << 0 << NL;
+    // //     return;
+    // // }
+    // vector<ll> v(n);
+    // forn(i,0,n) cin >> v[i];
+
+
+    // vector<pair<ll,ll>> ov;
+    // forn(i,0,n)
+    // {
+    //     forn(j,i+1,n)
+    //     {
+    //         ov.push_back({v[i],v[j]});
+    //         if(v[i] < v[j])
+    //         {
+    //             ov.push_back({v[j], v[i]});
+    //         }
+    //     }
+    // }
+
+    // cout << ov.size() << NL;
+    // sort(ov.begin(),ov.end(),comp);
+    // for (auto [u,v] : ov)
+    // {
+    //     cout << u << " " << v << NL;
+    //     // return;
+    // }
+    // return;
+
+
+
+
+
 }   
     
 int main()

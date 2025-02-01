@@ -1,7 +1,7 @@
 // Bismillahir Rahmanir Rahim
      
-// link    : https://vjudge.net/problem/CSES-1633
-// status  : AC
+// link    : https://codeforces.com/contest/687/problem/C
+// status  : 
      
 #pragma GCC optimize("O1,O2,O3")
 #pragma GCC optimize("Ofast,unroll-loops")
@@ -38,23 +38,25 @@ void Pre(void)
     
 void Solve(ll test)
 {
-    ll n; cin >> n;
-    vector<ll> dp(n + 1, 0);
-    // dp[1] = 1;
-    forn(i,1,n+1)
-    {
-        if(i <= 6) dp[i] = 1;
-        forn(j,1,7)
-        {
-            if(i - j < 0) break;
-            // dbg(dp[i - j]);
-            dp[i] += dp[i - j];
-            dp[i] %= M;
-        }
-        dp[i] %= M;
-    }
-    // forn(i,0,n+1) cerr << dp[i] << NL;
-    cout << dp[n] << NL;
+    // wrong
+    // ll n, k; cin >> n >> k;
+    // vector<ll> v(n); forn(i,0,n) cin >> v[i];
+    // sort(v.begin(),v.end());
+
+    // vector<ll> dp(k + 1, 0);
+    // forn(i,1,k + 1)
+    // {
+    //     ll idx = 0;
+    //     while(idx < n && idx <= i) dp[i] += dp[i - v[idx++]];
+    // }
+
+    // vector<ll> ans;
+    // ans.push_back(0);
+    // forn(i,0, k + 1) if(dp[i]) ans.push_back(i);
+    // sort(ans.begin(),ans.end());
+
+    // for(auto x : ans) cout << x << " ";
+    // cout << NL;
     return;
 }   
     

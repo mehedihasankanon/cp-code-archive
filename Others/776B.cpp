@@ -1,6 +1,6 @@
 // Bismillahir Rahmanir Rahim
      
-// link    : https://vjudge.net/problem/CSES-1633
+// link    : https://codeforces.com/contest/776/problem/B
 // status  : AC
      
 #pragma GCC optimize("O1,O2,O3")
@@ -27,9 +27,16 @@ ll INF = 0x7fffffffffffffffLL;
     
 ll testcase = 1;
 
+vector<bool> prime(1e5+10,true);
+// vector<ll> primes 
 void Pre(void)
 {
-    
+    prime[1] = false;
+    for(ll i = 4; i <= 1e5 + 10; i+= 2) prime[i] = false;
+    for(ll i = 3; i < 1e5 + 10; i+= 2)
+    {
+        if(prime[i]) for(ll j = i*i; j <= 1e5 + 10; j += i) prime[j] = false;
+    }
     
     
     return;
@@ -39,23 +46,17 @@ void Pre(void)
 void Solve(ll test)
 {
     ll n; cin >> n;
-    vector<ll> dp(n + 1, 0);
-    // dp[1] = 1;
-    forn(i,1,n+1)
-    {
-        if(i <= 6) dp[i] = 1;
-        forn(j,1,7)
-        {
-            if(i - j < 0) break;
-            // dbg(dp[i - j]);
-            dp[i] += dp[i - j];
-            dp[i] %= M;
-        }
-        dp[i] %= M;
-    }
-    // forn(i,0,n+1) cerr << dp[i] << NL;
-    cout << dp[n] << NL;
+    // edge cases
+    if(n == 1) {cout << 1 << NL << 1 << NL; return;}
+    if(n == 2) {cout << 1 << NL << "1 1" << NL; return;}
+    // vector<ll> v(n);
+    // forn(i,0,n) v[i] = i+2;
+
+    cout << 2 << NL;
+    forn(i,2,n + 2) {if(prime[i]) cout << 1 << " "; else cout << 2 << " ";} 
+
     return;
+
 }   
     
 int main()

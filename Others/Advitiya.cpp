@@ -1,7 +1,7 @@
 // Bismillahir Rahmanir Rahim
      
-// link    : https://vjudge.net/problem/CSES-1633
-// status  : AC
+// link    : https://www.codechef.com/START171C/problems/ADVITIYA
+// status  : ok
      
 #pragma GCC optimize("O1,O2,O3")
 #pragma GCC optimize("Ofast,unroll-loops")
@@ -38,23 +38,13 @@ void Pre(void)
     
 void Solve(ll test)
 {
-    ll n; cin >> n;
-    vector<ll> dp(n + 1, 0);
-    // dp[1] = 1;
-    forn(i,1,n+1)
+    string s = "ADVITIYA", s1; cin >> s1;
+    ll ans = 0;
+    forn(i,0,s.size())
     {
-        if(i <= 6) dp[i] = 1;
-        forn(j,1,7)
-        {
-            if(i - j < 0) break;
-            // dbg(dp[i - j]);
-            dp[i] += dp[i - j];
-            dp[i] %= M;
-        }
-        dp[i] %= M;
+        ans += (s[i] - s1[i] + 26) % 26;
     }
-    // forn(i,0,n+1) cerr << dp[i] << NL;
-    cout << dp[n] << NL;
+    cout << ans << NL;
     return;
 }   
     
@@ -64,7 +54,7 @@ int main()
     cin.tie(nullptr); cout.tie(nullptr);
     Pre();
     
-    // cin >> testcase;
+    cin >> testcase;
     
     ll test;
     for(test = 1; test <= testcase; test++) {
