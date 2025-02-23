@@ -1,24 +1,13 @@
-// Bismillahir Rahmanir Rahim
-     
-// link    : https://cses.fi/problemset/task/1635
-// status  : 
-     
-#pragma GCC optimize("O1,O2,O3")
-#pragma GCC optimize("Ofast,unroll-loops")
-    
-#include <bits/stdc++.h>
-    
-// #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma,bmi,bmi2,lzcnt")
-    
+// #pragma GCC optimize("O1,O2,O3")
+
+#include <iostream>
+#include <vector>   
+
 using namespace std;
     
-using ll = long long;
-using ld = long double;
+using ll = int;
     
 ll M = 1000000007;
-ll MOD = 998244353;
-ld EPS = 1e-12;
-ll INF = 0x7fffffffffffffffLL;
     
 #define dbg(x) cerr << #x << " " << x << "\n"
 #define NL "\n"
@@ -26,46 +15,26 @@ ll INF = 0x7fffffffffffffffLL;
 #define rfor(i,s,e) for(ll i = s; i >= e; i--)
     
 ll testcase = 1;
-
-void Pre(void)
-{
-    
-    
-    
-    return;
-}   
-    
     
 void Solve(ll test)
 {
     ll n, x; cin >> n >> x;
-    vector<ll> v(n);
-    vector<ll> dp(x+1, 0);
-    dp[0] = 0;
-    forn(i,0,n) cin >> v[i],dp[v[i]]++;
+    vector<ll> coins(n), dp(x + 1);
+    dp[0] = 1;
+    forn(i,0,n) cin >> coins[i];
 
+    forn(i,1,x+1) for(int c : coins) if(i - c >= 0) (dp[i] += dp[i - c]) %= M;
 
-    forn(i,1,x+1)
-    {
-        forn(j,0,n)
-        {
-            if(v[j] > i) break;
-            dp[i] += dp[i - v[j]];
-            dp[i] %= M;
-        }
-        dp[i] %= M;
-    }
     cout << dp[x] << NL;
+    return;
+    
 }   
     
 int main()
 {   
-    ios_base::sync_with_stdio(false); 
-    cin.tie(nullptr); cout.tie(nullptr);
-    Pre();
-    
-    // cin >> testcase;
-    
+    // ios_base::sync_with_stdio(false); 
+    // cin.tie(nullptr); cout.tie(nullptr);
+
     ll test;
     for(test = 1; test <= testcase; test++) {
         Solve(test);

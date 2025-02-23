@@ -1,7 +1,7 @@
 // Bismillahir Rahmanir Rahim
      
 // link    : https://codeforces.com/contest/1497/problem/C2
-// status  : 
+// status  : **editorial**
      
 #pragma GCC optimize("O1,O2,O3")
 #pragma GCC optimize("Ofast,unroll-loops")
@@ -39,11 +39,90 @@ void Pre(void)
 void Solve(ll test)
 {
     ll n, k; cin >> n >> k;
-    
+    // ll t = n/2, cs = 1;
+    // vector<ll> v(k,1);
+    // n -= k;
+    // if(n & 1) 
+    // {
+    //     v.back()++; cs++; n--;
+    // }
+
+    // ll idx = 0;
+    // while(n > 0)
+    // {
+    //     if(idx >= n) break;
+    //     if(cs == 1)
+    //     {
+    //         if(idx == n - 1)
+    //         {
+    //             v[idx] += 2;
+    //             n -= 2;
+    //         }
+    //         else
+    //         {
+    //             if(v[idx] == t) idx += 2;
+    //             else
+    //             {
+    //                 // v[idx]+=2; v[idx+1]++;
+    //                 // n -= 2;
+    //                 if(n >= 4)
+    //                 {
+    //                     if(v[idx] & 1) 
+    //                     {
+    //                         v[idx]++; v[idx + 1]++;
+    //                         n -= 2;
+    //                     }
+    //                     else
+    //                     {
+    //                         if(v[idx] <= t - 1)
+    //                         {
+    //                             v[idx]+=2; v[idx + 1] += 2;
+    //                             n -= 4;
+    //                         }
+    //                         else
+    //                         {
+    //                             idx += 2;
+    //                         }
+    //                     }
+    //                 }
+    //                 else
+    //                 {
+    //                     if(v[idx] & 1)
+    //                     {
+    //                         v[idx]++; v[idx + 1]++;
+    //                         n -= 4;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
 
 
-    cout << NL;
+    // cout << NL;
+
+
+    // vector<ll> v(k - 3, 1);
+    forn(i,0,k-3) cout << 1 << " ";
+    ll t = n - k + 3;
+    // n -= k - 3;
+    if(t&1)
+    {
+        cout << 1 << " " << t/2 << " " << t/2 << NL;
+        return;
+    }
+    if(t % 4 != 0)
+    {
+        cout << 2 << " " << t/2 - 1 << " " << t/2 - 1 << NL;
+        return;
+    }
+    else
+    {
+        cout << t/2 << " " << t/4 << " " << t/4 << NL;
+        return;
+    }
+
     return;
 }   
     
