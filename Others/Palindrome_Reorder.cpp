@@ -58,7 +58,7 @@ void Solve(ll test)
     for(auto c : s) cnt[c - 'A']++;
     forn(i,0,26) 
     {
-        if(cnt[i] & 1) 
+        if(cnt[i] & 1)
         {
             idx = i;
             c1++;
