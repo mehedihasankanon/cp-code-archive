@@ -1,65 +1,78 @@
-// Bismillahir Rahmanir Rahim
-     
-// link    : 
-// status  : 
-     
-#pragma GCC optimize("O1,O2,O3")
-#pragma GCC optimize("Ofast,unroll-loops")
-    
 #include <bits/stdc++.h>
-    
-// #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma,bmi,bmi2,lzcnt")
-    
 using namespace std;
-    
-typedef long long               ll;
-typedef long double             ld;
-typedef pair<int,int>           pii;
-typedef pair<ll,ll>             pll;
-typedef pair<double,double>     pdd;
-typedef vector<ll>              vll;
-typedef vector<int>             vint;
-    
-ll M = 1000000007;
-ll MOD = 998244353;
-ld eps = 1e-12;
-    
-#define dbg(x)                  cout << #x << " " << x << "\n"
-#define nl                      "\n"
-#define INF                     2e18
-#define forn(i,s,e)             for(ll i = s; i < e; i++)
-#define rforn(i,s,e)            for(ll i = s; i >= e; i--)
-#define pb                      push_back
-#define all(x)                  (x).begin(), (x).end()
-    
-ll testcase = 1;
 
-void Pre(void)
-{   
-    
-}   
-    
-    
-void Solve(ll test)
-{   
-    
-}   
-    
+#define MOD 1000000007
+
 int main()
-{   
-    // freopen("input.in", "r", stdin);
-    // freopen("output.out", "w", stdout);
-    
-    ios_base::sync_with_stdio(false); 
-    cin.tie(nullptr); cout.tie(nullptr);
-    Pre();
-    
-    //cin >> testcase;
-    
-    ll test;
-    for(test = 1; test <= testcase; test++)
+{
+    long long t;
+    cin >> t;
+
+    while (t--)
     {
-        Solve(test);
+        long long n, k;
+        cin >> n >> k;
+        long long int ara[n];
+        long long int su[n];
+
+        map<int, int> mp;
+        for (int i = 0; i < n; i++)
+        {
+            cin >> ara[i];
+            mp[ara[i]]++;
+            su[i] = ara[i];
+        }
+
+        sort(ara, ara + n);
+
+        if (k == 1)
+        {
+            long long maxi = 0;
+
+            if (su[0] == ara[n - 1])
+            {
+
+                for (int i = 1; i < n; i++)
+                {
+                    maxi = max(maxi, su[i]);
+                }
+
+                cout << ara[n - 1] + maxi << endl;
+            }
+
+            else if (su[n - 1] == ara[n - 1])
+            {
+
+                for (int i = 0; i < n - 1; i++)
+                {
+                    maxi = max(maxi, su[i]);
+                }
+
+                cout << ara[n - 1] + maxi << endl;
+            }
+
+            else
+            {
+
+                cout << ara[n - 1] + max(su[0], su[n - 1]) << endl;
+            }
+            continue;
+        }
+
+        long long ans = 0;
+        k++;
+        for (int i = n - 1; i >= 0; i--)
+        {
+            if (k == 0)
+            {
+                break;
+            }
+            ans += ara[i];
+            k--;
+        }
+
+        cout << ans << endl;
     }
+
     return 0;
-}   
+}

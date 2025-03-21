@@ -1,8 +1,8 @@
-// Bismillahir Rahmanir Rahim
-     
-// link    : https://codeforces.com/contest/2064/problem/A
-// status  : ac
-     
+// Bismillahir rahmanir rahim
+    
+// 
+// ok
+    
 #pragma GCC optimize("O1,O2,O3")
 #pragma GCC optimize("Ofast,unroll-loops")
     
@@ -13,15 +13,27 @@
 using namespace std;
     
 using ll = long long;
+// using ll = int;
 using ld = long double;
     
 ll mod = 1000000007;
 // ll mod = 998244353;
     
-#define dbg(x) cerr << #x << " " << x << "\n"
 #define nl "\n"
 #define forn(i,s,e) for(ll i = s; i < e; i++)
 #define forr(i,s,e) for(ll i = s; i >= e; i--)
+    
+#define DEBUG
+    
+#ifdef DEBUG
+#define dbg(n) cerr<<__LINE__<<" "<<#n<<" "<<n<<endl;
+#define dbgc(a) cerr<<__LINE__<<" "<<#a<<" "<<'['<<" ";for(auto el:a){cerr<<el<<" ";}cerr<<']'<<endl;
+#define dbgcc(a) cout<<__LINE__<<" "<<#a<<" "<<'['<<" ";for(auto el:a){cerr<<'{'<<" "<<el.first<<','<<el.second<<" "<<'}'<<" ";}cerr<<']'<<endl;
+#else
+#define dbg(n) // single variable, string
+#define dbgc(a) // vector, deque, array
+#define dbgcc(a) // map, vector<pll>
+#endif
     
 ll testcase = 1;
 
@@ -34,36 +46,16 @@ void Pre(void)
     
 void Solve(ll test)
 {
-    ll n; cin >> n;
-    string s; cin >> s;
-    
-    // ll idx = 0, hi = n;
-    // while(idx < n && s[idx] == '0') idx++;
-    // while(hi > 1 && s[hi - 1] == '1') hi--;
+    ll n, k; cin >> n >> k;
+    vector<ll> a(n); forn(i,0,n) cin >> a[i];
+    ll sum = accumulate(begin(a),end(a),0);
 
-    // ll ans = 0;
-    // if(hi != n) ans++;
-    // while(idx < hi)
-    // {
-    //     while(idx < hi && s[idx] == '1') idx++;
-    //     // if()
-    // }
-
-    vector<ll> ind;
-    ind.push_back(0);
-    forn(i,1, n)
+    if(sum % k == 0 && sum/k == n)
     {
-        if(s[i] != s[i - 1]) {ind.push_back(i);}
+        cout << "YES" << nl;
+        return;
     }
-
-    ll ans = ind.size();
-    // dbg(ans);
-    // forn(i,0,ans) cerr << ind[i] << " ";
-    // cerr << nl;
-    if(s[0] == '0') ans--;
-    // if(s[n - 1] == '1') ans--;
-
-    cout << ans << nl;
+    cout << "NO" << nl;
     return;
 }   
     
