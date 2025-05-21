@@ -1,1 +1,0 @@
-{"name":"Local: a","url":"d:\\Coding\\vjudge\\a.cpp","tests":[{"id":1737030640055,"input":"3 2 3\n1 8 4\n","output":""},{"id":1737030644776,"input":"3 3 3\n1 8 4\n","output":""},{"id":1737030648952,"input":"4 3 5\n2 7 7 7\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Coding\\vjudge\\a.cpp","group":"local","local":true}
