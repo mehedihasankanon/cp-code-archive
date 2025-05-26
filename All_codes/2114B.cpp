@@ -1,7 +1,7 @@
 // Bismillahir rahmanir rahim
     
 // https://codeforces.com/contest/2114/problem/B
-// 
+// AC
     
 #pragma GCC optimize("O3,unroll-loops")
     
