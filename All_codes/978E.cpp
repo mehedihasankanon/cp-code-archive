@@ -1,6 +1,6 @@
 // Bismillahir rahmanir rahim
     
-// https://vjudge.net/contest/719474#problem/B
+// https://codeforces.com/contest/978/problem/E
 // AC
     
 #pragma GCC optimize("O3,unroll-loops")
@@ -36,40 +36,52 @@ ll mod = 1000000007;
     
 ll testcase = 1;
 
-const ll T = 2e5 + 10;
-
-vector<bool> prime(T,1);
 void Pre(void)
 {
-    for(ll i = 4; i < T; i+=2 ) prime[i] = 0;
-    for(ll i = 3; i < T; i+=2)
-    {
-        if(prime[i]) for(ll j = i * i; j < T; j += i) prime[j] = false;
-    }
+    
     return;
 }   
     
     
 void Solve(ll test)
 {
-    ll n; cin >> n;
-    if(n == 1)
+    ll n, k; cin >> n >> k;
+    ll mn = 1e15, tmp = 0, mx = -1e15;
+
+    vector<ll> v(n);
+    forn(i,0,n)
     {
-        cout << 1 << nl << 1;
+        cin >> v[i];
+        tmp += v[i];
+        mn = min(mn,tmp);
+        mx = max(mx, tmp);
+        if(tmp > k)
+        {
+            cout << 0 << nl;
+            return;
+        }
+    }
+
+
+    ll lwr_bnd = max(0LL,-mn);
+    ll upr_bnd = min(k, k - mx);
+
+    if(lwr_bnd > upr_bnd)
+    {
+        cout << 0 << nl;
         return;
     }
-    else if(n == 2)
-    {
-        cout << 1 << nl << "1 1 " << nl;
-        return;
-    }
-    cout << 2 << nl;
-    forn(i,2,n+2)
-    {
-        if(prime[i]) cout << 1 << " ";
-        else cout << 2 << " ";
-    }
-    return;
+    cout << upr_bnd - lwr_bnd + 1 << nl;
+
+    // ll minn = max(0LL,-mn);
+    // if(mx > k)
+    // {
+    //     cout << 0 << nl;
+    //     return;
+    // }
+    // cout << min(k + 1 - minn, k + 1 - mx) << nl;
+    // return;
+
 }   
     
 int main()
