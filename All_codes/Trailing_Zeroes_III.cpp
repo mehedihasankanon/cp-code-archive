@@ -67,7 +67,9 @@ void Solve(ll test)
 
     cout << "Case " << test << ": ";
 
-    ll l = 1, r = 4e18 + 5;
+    // ll l = 1, r = 4e18 + 5;
+    ll l = 1, r = 5 * n + 100;
+
     while(r - l > 1)
     {
         ll mid = l + (r - l) / 2;
