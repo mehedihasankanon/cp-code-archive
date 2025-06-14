@@ -1,38 +1,37 @@
-// Bismillahir Rahmanir Rahim
-     
-// link    : https://vjudge.net/problem/EOlymp-11161
-// status  : AC
-     
-#pragma GCC optimize("O1,O2,O3")
-#pragma GCC optimize("Ofast,unroll-loops")
+// Bismillahir rahmanir rahim
+    
+// https://vjudge.net/problem/EOlymp-11161
+// SHAAAAAAAAAAAAA!!!!!!!!
+    
+#pragma GCC optimize("O3,unroll-loops")
     
 #include <bits/stdc++.h>
     
-// #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma,bmi,bmi2,lzcnt")
+// #pragma GCC target("avx2")
     
 using namespace std;
     
 using ll = long long;
+// using ll = int;
 using ld = long double;
     
 ll mod = 1000000007;
 // ll mod = 998244353;
     
-#define dbg(x) cerr << #x << " " << x << "\n"
 #define nl "\n"
 #define forn(i,s,e) for(ll i = s; i < e; i++)
 #define forr(i,s,e) for(ll i = s; i >= e; i--)
     
-#define DEBUG
+// #define DEBUG
     
 #ifdef DEBUG
-#define debug(n) cout<<__LINE__<<" "<<#n<<" "<<n<<endl;
-#define debugc(a) cout<<__LINE__<<" "<<#a<<" "<<'['<<" ";for(auto el:a){cout<<el<<" ";}cout<<']'<<endl;
-#define debugcc(a) cout<<__LINE__<<" "<<#a<<" "<<'['<<" ";for(auto el:a){cout<<'{'<<" "<<el.F<<','<<el.S<<" "<<'}'<<" ";}cout<<']'<<endl;
+#define dbg(n) cerr<<__LINE__<<" "<<#n<<" "<<n<<endl;
+#define dbgc(a) cerr<<__LINE__<<" "<<#a<<" "<<'['<<" ";for(auto el:a){cerr<<el<<" ";}cerr<<']'<<endl;
+#define dbgcc(a) cerr<<__LINE__<<" "<<#a<<" "<<'['<<" ";for(auto el:a){cerr<<'{'<<" "<<el.first<<','<<el.second<<" "<<'}'<<" ";}cerr<<']'<<endl;
 #else
-#define debug(n) // single variable, string
-#define debugc(a) // vector, deque, array
-#define debugcc(a) // map, vector<pll>
+#define dbg(n) // single variable, string
+#define dbgc(a) // vector, deque, array
+#define dbgcc(a) // map, vector<pll>
 #endif
     
 ll testcase = 1;
@@ -42,45 +41,37 @@ void Pre(void)
     
     return;
 }   
+
+ll t, a, b; 
+
+void process(ll n, vector<vector<bool>> &poss, ll p)
+{
+    if(n > t) return;
+
+    if(poss[p][n]) return;
+
+    poss[p][n] = 1;
+    if(p == 0) process(n/2,poss,1);
+    process(n+a,poss,p);
+    process(n + b, poss, p);
+}
     
     
 void Solve(ll test)
 {
-    ll t, a, b; cin >> t >> a >> b;
-    vector<vector<bool>> dp(t + 1, vector<bool>(2,false));
+    cin >> t >> a >> b;
+    vector<vector<bool>> poss(2, vector<bool>(t + 1, 0));
 
-    dp[0][0] =  dp[0][1] = true;
-    ll ans = 0;
-    forn(i,0,t + 1)
+    process(0, poss, 0);
+
+    forr(i,t,0)
     {
-        if(dp[i][0])
+        if(poss[1][i] || poss[0][i])
         {
-            dp[i/2][1] = true;
-            dp[i][1] = true; // we can reach it if we drink the water at first
-            if(i + a <= t) dp[i + a][0] = dp[i + a][1] = true;
-            if(i + b <= t) dp[i + b][0] = dp[i + b][1] = true;
+            cout << i << nl;
+            return;
         }
-        if(dp[i][0] || dp[i][1]) ans = max(ans, i);
     }
-
-    forn(i,0,t + 1)
-    {
-        if(dp[i][1])
-        {
-            if(i + a <= t) dp[i + a][1] = true;
-            if(i + b <= t) dp[i + b][1] = true;
-        }
-        if(dp[i][0] || dp[i][1]) ans = max(ans,i);
-    }
-
-    // forn(i,0,t+1)
-    // {
-    //     cerr << dp[i][0] << dp[i][1] << nl;
-    // }
-
-    cout << ans << nl;
-    return;
-
 }   
     
 int main()

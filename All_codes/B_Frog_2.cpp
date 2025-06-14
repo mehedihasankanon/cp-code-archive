@@ -1,74 +1,99 @@
-// Bismillahir Rahmanir Rahim
-     
-// link    : https://atcoder.jp/contests/dp/tasks/dp_b
-// status  : AC
-     
-#pragma GCC optimize("O1,O2,O3")
-#pragma GCC optimize("Ofast,unroll-loops")
-    
+// Bismillahir rahmanir rahim
+
+// https://atcoder.jp/contests/dp/tasks/dp_b
+// AC --> recursive dp
+
+#pragma GCC optimize("O3,unroll-loops")
+
 #include <bits/stdc++.h>
-    
-// #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma,bmi,bmi2,lzcnt")
-    
+
+// #pragma GCC target("avx2")
+
 using namespace std;
-    
+
 using ll = long long;
+// using ll = int;
 using ld = long double;
-    
-ll M = 1000000007;
-ll MOD = 998244353;
-ld EPS = 1e-12;
-ll INF = 0x7fffffffffffffffLL;
-    
-#define dbg(x) cerr << #x << " " << x << "\n"
-#define NL "\n"
-#define forn(i,s,e) for(ll i = s; i < e; i++)
-#define rfor(i,s,e) for(ll i = s; i >= e; i--)
-    
+
+ll mod = 1000000007;
+// ll mod = 998244353;
+
+#define nl "\n"
+#define forn(i, s, e) for (ll i = s; i < e; i++)
+#define forr(i, s, e) for (ll i = s; i >= e; i--)
+
+// #define DEBUG
+
+#ifdef DEBUG
+#define dbg(n) cerr << __LINE__ << " " << #n << " " << n << endl;
+#define dbgc(a)                                         \
+    cerr << __LINE__ << " " << #a << " " << '[' << " "; \
+    for (auto el : a)                                   \
+    {                                                   \
+        cerr << el << " ";                              \
+    }                                                   \
+    cerr << ']' << endl;
+#define dbgcc(a)                                                                 \
+    cerr << __LINE__ << " " << #a << " " << '[' << " ";                          \
+    for (auto el : a)                                                            \
+    {                                                                            \
+        cerr << '{' << " " << el.first << ',' << el.second << " " << '}' << " "; \
+    }                                                                            \
+    cerr << ']' << endl;
+#else
+#define dbg(n)   // single variable, string
+#define dbgc(a)  // vector, deque, array
+#define dbgcc(a) // map, vector<pll>
+#endif
+
 ll testcase = 1;
 
 void Pre(void)
 {
-    
-    
-    
+
     return;
-}   
-    
-    
+}
+ll n, k;
+vector<ll> h;
+
+ll cost(ll n, vector<ll> &dp)
+{
+    if(dp[n] != 2e18) return dp[n];
+
+    forn(i,1,k+1)
+    {
+        if(n - i >= 0) dp[n] = min(dp[n], abs(h[n] - h[n - i]) + cost(n - i, dp));
+        else break;
+    }
+
+    return dp[n];
+
+}
+
 void Solve(ll test)
 {
-    ll n, k; cin >> n >> k;
-    vector<ll> v(n+1), dp(n + 1, INF);
-    forn(i,1,n+1) cin >> v[i];
+    cin >> n >> k;
+    h.resize(n);
+    forn(i,0,n) cin >> h[i];
+    vector<ll> dp(n, 2e18);
+    dp[0] = 0;
 
-    dp[0] = 0; dp[1] = 0;
-    forn(i,2,n+1)
-    {
-        ll j = 1;
-        while(j <= k && i - j >= 1)
-        {
-            dp[i] = min(dp[i], dp[i - j] + abs(v[i] - v[i - j]));
-            // dbg(dp[i]);
-            j++;
-        }
-        // cerr << "---------" << NL;
-    }
-    cout << dp[n] << NL;
-    return;
-}   
-    
+    cout << cost(n - 1, dp) << nl;
+}
+
 int main()
-{   
-    ios_base::sync_with_stdio(false); 
-    cin.tie(nullptr); cout.tie(nullptr);
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
     Pre();
-    
+
     // cin >> testcase;
-    
+
     ll test;
-    for(test = 1; test <= testcase; test++) {
+    for (test = 1; test <= testcase; test++)
+    {
         Solve(test);
     }
     return 0;
-}   
+}
