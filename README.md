@@ -1,3 +1,3 @@
 **Codes for most of the CP problems I have solved**
 
-```Upd: 30 May 2025 11:30 PM```
+```24 Jun 2025 : Taking a hiatus from participaing in contests. Probably gonna solve one or two problems here and there```
