@@ -1,7 +1,7 @@
 // Bismillahir Rahmanir Rahim
      
 // link    : https://codeforces.com/contest/1722/problem/E
-// status  : 
+// status  : ok
      
 #pragma GCC optimize("O1,O2,O3")
 #pragma GCC optimize("Ofast,unroll-loops")
@@ -62,8 +62,7 @@ void Solve(ll test)
     forn(i,0,q)
     {
         ll x1, y1, x2, y2; cin >> x1 >> y1 >> x2 >> y2;
-        x1--, y1--, x2--, y2--;
-        cout << pref[x2 + 1][y2 + 1] - pref[x2 + 1][y1] - pref[x1][y2 + 1] + pref[x1][y1] << NL;
+        cout << pref[x2 - 1][y2 - 1] - pref[x2 - 1][y1] - pref[x1][y2-1] + pref[x1][y1] << NL; 
     }
     return;
 }   
