@@ -1,7 +1,7 @@
 // Bismillahir rahmanir rahim
 
-// https://codeforces.com/contest/61/problem/E
-// 
+// https://www.codechef.com/problems/AMCS03
+// ok
 
 #pragma GCC optimize("O3,unroll-loops")
 
@@ -48,23 +48,56 @@ ll mod = 1000000007;
 
 ll testcase = 1;
 
-ll N = 3e5 + 9;
-
-
-class SegTree {
-    
-};
-
 void Pre(void)
 {
 
     return;
 }
 
+vector<ld> s, d;
+
+ld get_diff(ld t)
+{
+    ld max_pos = -1e18, min_pos = 1e18;
+
+    forn(i, 0, s.size())
+    {
+        ld p = s[i] * t + d[i];
+        if(p > max_pos) max_pos = p;
+        if(p < min_pos) min_pos = p; 
+    }
+
+    return max_pos - min_pos;
+}
 
 void Solve(ll test)
 {
+    ll n, k; cin >> n >> k;
+    s.resize(n), d.resize(n);
     
+    forn(i,0,n)
+    {
+        cin >> s[i] >> d[i];
+    }
+
+    ld lo = 0, hi = k;
+    forn(i,0,100)
+    {
+        ld m1 = lo + (hi - lo) / 3.0, m2 = hi - (hi - lo) / 3.0;
+        
+        if(get_diff(m1) < get_diff(m2))
+        {
+            hi = m2;
+        }
+        else
+        {
+            lo = m1;
+        }
+
+    }
+
+    cout << setprecision(10) << fixed << get_diff(lo) << nl;
+    return;
 }
 
 int main()
@@ -81,3 +114,4 @@ int main()
     }
     return 0;
 }
+
