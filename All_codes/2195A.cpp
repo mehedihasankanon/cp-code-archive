@@ -1,29 +1,41 @@
 // Bismillahir rahmanir rahim
-    
-// https://codeforces.com/contest/1703/problem/G
-// Editorial
-    
+
+// https://codeforces.com/contest/2195/problem/A
+// ok
+
 #pragma GCC optimize("O3,unroll-loops")
-    
+
 #include <bits/stdc++.h>
-    
+
 // #pragma GCC target("avx2")
-    
+
 using namespace std;
-    
+
+// #include <ext/pb_ds/assoc_container.hpp>
+// #include <ext/pb_ds/tree_policy.hpp>
+// using namespace __gnu_pbds;
+
+// template<typename T>
+// using ordered_set = tree<T, null_type, std::less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+
+// Extra functionality :
+// os.find_by_order(index) => iterator to the element at that index (0-based)
+// os.order_of_key(value) => number of elements strictly less than value
+
 using ll = long long;
 // using ll = int;
 using ld = long double;
-    
+
 ll mod = 1000000007;
 // ll mod = 998244353;
-    
+
 #define nl "\n"
 #define forn(i,s,e) for(ll i = s; i < e; i++)
 #define forr(i,s,e) for(ll i = s; i >= e; i--)
-    
+
+
 // #define DEBUG
-    
+
 #ifdef DEBUG
 #define dbg(n) cerr<<__LINE__<<" "<<#n<<" "<<n<<endl;
 #define dbgc(a) cerr<<__LINE__<<" "<<#a<<" "<<'['<<" ";for(auto el:a){cerr<<el<<" ";}cerr<<']'<<endl;
@@ -33,92 +45,33 @@ ll mod = 1000000007;
 #define dbgc(a) // vector, deque, array
 #define dbgcc(a) // map, vector<pll>
 #endif
-    
+
 ll testcase = 1;
 
 void Pre(void)
 {
-    
-    return;
-}   
 
-
-void Solve(ll test) 
-{
-    ll n, k; cin >> n >> k;
-
-    vector<ll> v(n);
-
-    forn(i,0,n) cin >> v[i];
-
-    ll ans = -2e18, cur = 0;
-
-    forn(i,0,n)
-    {
-
-        ll t = 0;
-        
-        forn(j,i,min(i + 40, n))
-        {
-            t += v[j] / (1LL << (j - i + 1));
-        }
-
-        ans = max(ans, cur - i * k + t);
-        cur += v[i];
-    }
-
-    ans = max(ans, cur - n * k);
-
-    cout << max(ans,0LL) << nl;
     return;
 }
 
-    
 
+void Solve(ll test)
+{
+    ll n; cin >> n;
+    vector<ll> v(n);
+    forn(i,0,n) cin >> v[i];
 
+    for(auto t: v)
+    {
+        if(t == 67)
+        {
+            cout << "YES" << nl;
+            return;
+        }
+    }
+    cout << "NO" << nl;
+    return;}
 
-
-
-    
-// void Solve(ll test)
-// {
-//     ll n, k; cin >> n >> k;
-//     vector<ll> v(n);
-//     forn(i,0,n) cin >> v[i];
-
-//     ll mx = -2e18, cur_sum = 0;
-//     forn(i,0,n)
-//     {
-//         ll temp_sum = 0, temp_div = 2;
-//         forn(j,0,35)
-//         {
-//             if(i + j >= n) break;
-//             temp_sum += v[i + j] / temp_div;
-//             temp_div *= 2; 
-//         }
-//         mx = max(cur_sum - i * k + temp_sum, mx);
-//         cur_sum += v[i];
-//     }
-//     mx = max(cur_sum - n * k, mx);
-//     cout << mx << nl;
-//     return;
-// }  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-    
 int main()
 {   
     ios_base::sync_with_stdio(false); 
@@ -129,7 +82,8 @@ int main()
     
     ll test;
     for(test = 1; test <= testcase; test++) {
+        // dbgc(test);
         Solve(test);
     }
     return 0;
-}   
+}
