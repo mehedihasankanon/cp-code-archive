@@ -1,6 +1,6 @@
 // Bismillahir rahmanir rahim
 
-// https://codeforces.com/contest/1603/problem/B
+// https://codeforces.com/contest/1917/problem/C
 // editorial
 
 #pragma GCC optimize("O3,unroll-loops")
@@ -67,34 +67,34 @@ void Pre(void)
 
 void Solve(ll test)
 {
+    ll n, k, d;
+    cin >> n >> k >> d;
 
-    ll x, y;
-    cin >> x >> y;
+    vector<ll> a(n), b(k);
 
-    if (x == y)
+    forn(i, 0, n) cin >> a[i];
+    forn(i, 0, k) cin >> b[i];
+
+    ll ans = 0;
+    for (ll i = 0; i < d and i <= 2 * n; i++)
     {
-        cout << (x + y) / 2 << nl;
+        ll t = 0;
+        forn(j, 0, n)
+        {
+            t += (a[j] == j + 1);
+        }
 
-        // ll n = (x + y) / 2;
-        // cerr << n % x << " " << y % n << nl;
-        return;
+        t += (d - 1 - i) / 2;
+
+        ans = max(ans, t);
+
+        forn(j, 0, b[i % k])
+        {
+            a[j]++;
+        }
     }
 
-    else if (x < y)
-    {
-        cout << y - (y % x) / 2 << nl;
-        return;
-    }
-
-    else
-    {
-        cout << x + y << nl;
-
-        // ll n = (x + y);
-        // cerr << n % x << " " << y % n << nl;
-        return;
-    }
-
+    cout << ans << nl;
     return;
 }
 
@@ -110,6 +110,7 @@ int main()
     ll test;
     for (test = 1; test <= testcase; test++)
     {
+        // dbgc(test);
         Solve(test);
     }
     return 0;

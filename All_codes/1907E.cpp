@@ -42,55 +42,11 @@ void Pre(void)
     
     return;
 }   
-
-// ll ds(ll n)
-// {
-//     ll ans = 0;
-//     while(n)
-//     {
-//         ans += n % 10;
-//         n /= 10;
-//     }
-//     return ans;
-// }
     
     
 void Solve(ll test)
 {
     ll n; cin >> n;
-    // ll d = ds(n);
-
-    // ll ans = 0;
-
-    // forn(i,0,1010)
-    // {
-    //     forn(j,0,1010)
-    //     {
-    //         if(ds(i) + ds(j) + ds(n - i - j) == d)
-    //         {
-    //             ans += 6;
-    //             if(i == j)
-    //             {
-    //                 if(j == n - i - j)
-    //                 {
-    //                     ans -= 5;
-    //                 }
-    //                 else
-    //                 {
-    //                     ans -= 3;
-    //                 }
-    //             }
-    //             else
-    //             {
-    //                 if(j == n - i - j)
-    //                 {
-    //                     ans -= 3;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-    // cout << ans << nl;
 
 
     ll ans = 1;

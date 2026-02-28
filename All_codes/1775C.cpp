@@ -1,7 +1,7 @@
 // Bismillahir rahmanir rahim
 
-// https://codeforces.com/contest/1603/problem/B
-// editorial
+// https://codeforces.com/contest/1775/problem/C
+// ac
 
 #pragma GCC optimize("O3,unroll-loops")
 
@@ -67,34 +67,63 @@ void Pre(void)
 
 void Solve(ll test)
 {
+    ll n, x;
+    cin >> n >> x;
 
-    ll x, y;
-    cin >> x >> y;
-
-    if (x == y)
+    if (n < x)
     {
-        cout << (x + y) / 2 << nl;
-
-        // ll n = (x + y) / 2;
-        // cerr << n % x << " " << y % n << nl;
+        cout << -1 << nl;
         return;
     }
 
-    else if (x < y)
+    if (n == x)
     {
-        cout << y - (y % x) / 2 << nl;
+        cout << x << nl;
         return;
     }
 
-    else
+    ll msb = 63, t = n;
+    while (!((t >> msb) & 1))
     {
-        cout << x + y << nl;
-
-        // ll n = (x + y);
-        // cerr << n % x << " " << y % n << nl;
-        return;
+        msb--;
     }
 
+    ll u = x;
+    // msb--;
+    while(msb >= 0)
+    {
+        if(!((u >> msb) & 1LL) and ((t >> msb) & 1LL))
+        {
+            for(ll i = msb - 1; i >= 0; i--)
+            {
+                if(((u >> i) & 1))
+                {
+                    cout << -1 << nl;
+                    return;
+                }
+            }
+
+            if(((t >> (msb + 1)) & 1LL))
+            {
+                cout << -1 << nl;
+                return;
+            }
+
+            cerr << ((t >> msb) << msb) << " " << (1LL << (msb + 1)) << nl;
+
+            ll v = ((t >> (msb + 1)) << (msb + 1));
+            v |= (1LL << (msb + 1));
+
+            cout << v << nl;
+            return;
+        }
+        msb--;
+    }
+
+    cout << -1 << nl;
+    return;
+
+    cout << "??" << nl;
     return;
 }
 
@@ -110,6 +139,7 @@ int main()
     ll test;
     for (test = 1; test <= testcase; test++)
     {
+        // dbgc(test);
         Solve(test);
     }
     return 0;
